@@ -229,6 +229,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2020/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1conda%E6%9B%B4%E6%96%B0%E6%BA%90%E9%80%A0%E6%88%90%E7%9A%84%E5%BD%B1%E5%93%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JYC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoyChans">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1conda%E6%9B%B4%E6%96%B0%E6%BA%90%E9%80%A0%E6%88%90%E7%9A%84%E5%BD%B1%E5%93%8D/" itemprop="url">记录一次conda更新源造成的影响</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-24T09:53:05+08:00">
+                2020-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前一阵子，假期基本属于结束了，于是决定开始写点东西。那会儿想到已经很久没有写过代码了，于是打算先更新一下conda的包。首先运行了一下<code>conda updade --all</code>，显示需要更新的包后，我等待其更新。<br>期间由于源是属于国外的默认源，速度极其缓慢。我决定替换为国内的TH源，将channel替换后，按照指示清除索引缓存<code>conda clean -i</code>。大功告成后，我再次输入命令来更新包，于是出现了不可描述的第一个问题:</p>
+<img src="/2020/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1conda%E6%9B%B4%E6%96%B0%E6%BA%90%E9%80%A0%E6%88%90%E7%9A%84%E5%BD%B1%E5%93%8D/1.png" class title="（图来源于StackOverFlow）">
+<p>引发了这个问题后，所有的有关conda的install、update指令等，都会卡在这个界面非常长的时间。Fine, 我开始在网上搜索解决方案。<br>第一个方案来源于CSDN:</p>
+<ol>
+<li>首先，输入<code>conda list -r</code>查询之前的更新版本，然后选择一个之前的版本（出现问题之前），输入<code>conda install --revision number</code>之后等待回滚成功.</li>
+<li>回退成功后，删除之前添加的所有channel.</li>
+</ol>
+<p>OK，OK。我看这位老哥跟我的情况差不多，按照他的手法来试了试。我找到了比较早的一个历史版本，我原本还担心我的一些安装过的环境需要重新下，结果在执行revision时，直接给我抛出了错误:</p>
+<img src="/2020/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1conda%E6%9B%B4%E6%96%B0%E6%BA%90%E9%80%A0%E6%88%90%E7%9A%84%E5%BD%B1%E5%93%8D/2.png" class title="回退报错">
+
+<p>好了，这下也没办法回退了。我在StackOverFlow上寻找一会儿吧。最终在这个页面找到了一些个解决方案（<a href="https://stackoverflow.com/questions/55527354/" target="_blank" rel="noopener">https://stackoverflow.com/questions/55527354/</a> ）。解决方案大致如下：</p>
+<ul>
+<li><code>conda install anaconda</code> 。 无用，我前面说过，install， upgrade均卡住。</li>
+<li><code>conda update --all</code>。 无用，我就是执行这个卡住的 :-) </li>
+<li><code>conda install -c anaconda anaconda</code>。无用</li>
+<li>…</li>
+</ul>
+<p>一天多的尝试下来，最后，我也没招了。怎么办呢，我重新看了看TH源添加channel那。我逆向操作一下吧，将原先添加的源都删除到只剩下默认源，然后重新执行<code>conda clean -i</code>。莫名其妙就好使了。可能是之前索引缓存没有清理好？还是channel添加有问题？记录一下吧。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2020/06/13/%E4%BD%BF%E7%94%A8github-io%E6%9D%A5%E8%AE%B0%E5%BD%95%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -327,138 +464,6 @@
 <p>​    总的来说，本科期间漏掉了很多记录点滴的机会，我在硕士期间要好好把握。该page会记录一些技术上的见解，论文解读，环境搭建，竞赛和会议杂谈等。若后续购买了新的云服务器，我也会同步更新。我认为这是一种很好的记录生活的方式。</p>
 <hr>
 <p>最后希望我这小菜鸡能够做出一些成绩。也希望相关领域的朋友能够相互认识一下，谢谢！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2020/06/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JYC">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JoyChans">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/11/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-11T21:06:17+08:00">
-                2020-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
         
