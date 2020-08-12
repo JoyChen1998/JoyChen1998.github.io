@@ -187,12 +187,42 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/%20" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            About
           </a>
         </li>
       
@@ -300,10 +330,10 @@
       
         
           
-            <p>由于最近看论文，我学着使用Tex来写点文档，每次编译后都会生成很多中间文件，比如 “*.nav *.snm *.synctex.gz *.xdv …” ,我最初想着自己写个sh来解决问题。但是它们也自带一个工具可以用来清理这些生成的文件（用它们的也蛮香的～）——<code>latexmk</code>，详情如何使用，可以输入<code>latexmk --help</code>查看帮助。其中，-c 和 -C 分别是清除部分文件和全部文件（只保留*.tex）。那如果我想只留下*.tex、*.pdf怎么办呢？方法如下：</p>
+            <p>由于最近看论文，我学着使用Tex来写点文档，每次编译后都会生成很多中间文件，比如 “*.nav  *.snm *.synctex.gz *.xdv 等” ,我最初想着自己写个sh来解决问题。但是它们也自带一个工具<code>latexmk</code>可以用来清理这些生成的文件（挺香的～）。使用详情，可以输入<code>latexmk --help</code>查看帮助。其中，-c 和 -C 分别是清除部分文件和全部文件（只保留*.tex）。那如果我想只留下*.tex、*.pdf怎么办呢？方法记录如下：</p>
 <ul>
-<li>先找到latexmk的源文件。由于我的是macOS，我的可执行文件可以在该路径中找到，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source3.png" class title="bin目录"></li>
-<li>然后查找可执行文件的源地址，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source2.png" class title="源文件地址"></li>
+<li>先找到latexmk的源文件。由于我的是macOS，我的可执行文件可以在该路径中找到，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source3.png" class></li>
+<li>然后查找可执行文件的源地址，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source2.png" class></li>
 <li>可见该文件是个perl文件（这个不重要），打开该文件并查找<code>$clean_ext</code>该变量，在后方添加需要处理掉的文件后缀，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source1.png" class>
 修改成功后，保存文件。重新进入原先生成tex文件的目录，再次执行<code>latexmk -c</code>，就成功清除了其他文件（该命令貌似只能在相应目录下有效果hhh）。</li>
 </ul>
