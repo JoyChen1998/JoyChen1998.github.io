@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Tips," />
 
 
 
@@ -79,13 +79,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="JoyChans">
-<meta property="og:url" content="https://www.jyc1998.cn/archives/index.html">
+<meta name="description" content="由于最近看论文，我学着使用Tex来写点文档，每次编译后都会生成很多中间文件，比如 “*.nav *.snm *.synctex.gz *.xdv …” ,我最初想着自己写个sh来解决问题。但是它们也自带一个工具可以用来清理这些生成的文件（用它们的也蛮香的～）——latexmk，详情如何使用，可以输入latexmk --help查看帮助。其中，-c 和 -C 分别是清除部分文件和全部文件（只保留*.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS如何删除LaTeX编译时生成的冗余文件">
+<meta property="og:url" content="https://www.jyc1998.cn/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="JoyChans">
+<meta property="og:description" content="由于最近看论文，我学着使用Tex来写点文档，每次编译后都会生成很多中间文件，比如 “*.nav *.snm *.synctex.gz *.xdv …” ,我最初想着自己写个sh来解决问题。但是它们也自带一个工具可以用来清理这些生成的文件（用它们的也蛮香的～）——latexmk，详情如何使用，可以输入latexmk --help查看帮助。其中，-c 和 -C 分别是清除部分文件和全部文件（只保留*.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.jyc1998.cn/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source3.png">
+<meta property="og:image" content="https://www.jyc1998.cn/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source2.png">
+<meta property="og:image" content="https://www.jyc1998.cn/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source1.png">
+<meta property="article:published_time" content="2020-08-12T11:33:16.000Z">
+<meta property="article:modified_time" content="2020-08-12T11:53:43.844Z">
 <meta property="article:author" content="JYC">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.jyc1998.cn/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source3.png">
 
 
 
@@ -115,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://www.jyc1998.cn/archives/"/>
+  <link rel="canonical" href="https://www.jyc1998.cn/2020/08/12/macOS如何删除LaTeX编译时生成的冗余文件/"/>
 
 
 
 
 
-  <title>Archive | JoyChans</title>
+  <title>macOS如何删除LaTeX编译时生成的冗余文件 | JoyChans</title>
   
 
 
@@ -140,7 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,148 +223,153 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JYC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoyChans">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">macOS如何删除LaTeX编译时生成的冗余文件</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-12T19:33:16+08:00">
+                2020-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 3 posts in total. Keep on posting.
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/" itemprop="url">
-              
-                <span itemprop="name">macOS如何删除LaTeX编译时生成的冗余文件</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-08-12T19:33:16+08:00"
-              content="2020-08-12" >
-          08-12
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1conda%E6%9B%B4%E6%96%B0%E6%BA%90%E9%80%A0%E6%88%90%E7%9A%84%E5%BD%B1%E5%93%8D/" itemprop="url">
-              
-                <span itemprop="name">记录一次conda更新源造成的影响</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-24T09:53:05+08:00"
-              content="2020-07-24" >
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/06/13/%E4%BD%BF%E7%94%A8github-io%E6%9D%A5%E8%AE%B0%E5%BD%95%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" itemprop="url">
-              
-                <span itemprop="name">使用github.io来记录自己的博客</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-13T10:54:46+08:00"
-              content="2020-06-13" >
-          06-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>由于最近看论文，我学着使用Tex来写点文档，每次编译后都会生成很多中间文件，比如 “*.nav *.snm *.synctex.gz *.xdv …” ,我最初想着自己写个sh来解决问题。但是它们也自带一个工具可以用来清理这些生成的文件（用它们的也蛮香的～）——<code>latexmk</code>，详情如何使用，可以输入<code>latexmk --help</code>查看帮助。其中，-c 和 -C 分别是清除部分文件和全部文件（只保留*.tex）。那如果我想只留下*.tex、*.pdf怎么办呢？方法如下：</p>
+<ul>
+<li>先找到latexmk的源文件。由于我的是macOS，我的可执行文件可以在该路径中找到，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source3.png" class title="bin目录"></li>
+<li>然后查找可执行文件的源地址，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source2.png" class title="源文件地址"></li>
+<li>可见该文件是个perl文件（这个不重要），打开该文件并查找<code>$clean_ext</code>该变量，在后方添加需要处理掉的文件后缀，如下所示：<img src="/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/source1.png" class>
+修改成功后，保存文件。重新进入原先生成tex文件的目录，再次执行<code>latexmk -c</code>，就成功清除了其他文件（该命令貌似只能在相应目录下有效果hhh）。</li>
+</ul>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tips/" rel="tag"># Tips</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/24/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1conda%E6%9B%B4%E6%96%B0%E6%BA%90%E9%80%A0%E6%88%90%E7%9A%84%E5%BD%B1%E5%93%8D/" rel="next" title="记录一次conda更新源造成的影响">
+                <i class="fa fa-chevron-left"></i> 记录一次conda更新源造成的影响
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -363,6 +377,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -584,6 +602,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
