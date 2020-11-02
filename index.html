@@ -239,6 +239,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JYC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoyChans">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">修复grub2中windows启动项循环的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-02T19:40:52+08:00">
+                2020-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在<code>Ubuntu</code>执行了一次grub更新 <code>sudo update-grub</code>（引发了问题）。台式机进入系统选择时，我选择windows10启动项，但黑屏后重新返回到了grub界面继续让选启动项….<b>我直接裂开来</b>。该情况一直循环并无法再进入windows10。此时，我可以选择其他的启动项（<code>Ubuntu</code>）并正常进入。在Google上搜索了一会儿后，我的问题由以下方案修复成功（建议操作前先备份配置文件等）：</p>
+<ol>
+<li><p>正常进入<code>Ubuntu</code>，并执行<code>sudo update-grub</code>，执行后查看grub的配置文件<code>vim /boot/grub/grub.cfg</code>.</p>
+<img src="/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/grub_update.png" class>
+</li>
+<li><p>找到windows10的启动选项，并查看在<code>chainloader +1</code>的下一行是否有<code>ntldr /bootmgr</code>， 若没有则退出。因为在该位置添加上后面的语句后，只是暂时可以进入windows10。在下一次进行grub更新后，之前的写入会被重新覆盖，于是<b>该问题再放送</b>。</p>
+<img src="/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/grub_cfg_check.png" class>
+</li>
+<li><p>打开<code>/etc/grub.d/40_custom</code> ，将<code>grub.cfg</code>中有关windows10启动项的配置复制到该文件中，并在<code>chainloader +1</code>的下一行添加<code>ntldr /bootmgr</code>，保存并关闭后，再次执行<code>sudo upgrade-grub</code>。该操作会将刚刚写入的配置挂接在grub配置文件中。</p>
+<img src="/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/grub_40_custom.png" class>
+</li>
+<li><p>完成上述操作后，重启系统。再次进入grub引导，此时会多出一个windows10的启动选项（因为本身有一个，又挂接了一个）。选择新挂接的启动选项，我顺利进入了windows10（顺序为<code>grub.cfg</code>中引导项的顺序），此后都很正常了。</p>
+</li>
+</ol>
+<p>记录一下，希望以后能有帮助。如果该操作有潜在威胁，劳烦您邮件提出，谢谢。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2020/08/12/macOS%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4LaTeX%E7%BC%96%E8%AF%91%E6%97%B6%E7%94%9F%E6%88%90%E7%9A%84%E5%86%97%E4%BD%99%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -681,7 +815,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
