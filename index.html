@@ -310,12 +310,12 @@
       
         
           
-            <p>最近在<code>Ubuntu</code>执行了一次grub更新 <code>sudo update-grub</code>（引发了问题）。台式机进入系统选择时，我选择windows10启动项，但黑屏后重新返回到了grub界面继续让选启动项….<b>我直接裂开来</b>。该情况一直循环并无法再进入windows10。此时，我可以选择其他的启动项（<code>Ubuntu</code>）并正常进入。在Google上搜索了一会儿后，我的问题由以下方案修复成功（建议操作前先备份配置文件等）：</p>
+            <p>最近在<code>Ubuntu</code>执行了一次grub更新 <code>sudo update-grub</code>（引发了问题）。台式机进入grub界面时，我选择windows10启动项，但黑屏后重新返回到了grub界面继续让选启动项（grub-&gt;选win10-&gt;重回grub-&gt;…）… 该情况一直循环并无法进入windows10，<b>我直接裂开来</b>。此时，我可以选择其他的启动项（<code>Ubuntu</code>）并正常进入。在Google上搜索了一会儿后，我的问题由以下方案修复成功（建议操作前先备份配置文件等）：</p>
 <ol>
 <li><p>正常进入<code>Ubuntu</code>，并执行<code>sudo update-grub</code>，执行后查看grub的配置文件<code>vim /boot/grub/grub.cfg</code>.</p>
 <img src="/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/grub_update.png" class>
 </li>
-<li><p>找到windows10的启动选项，并查看在<code>chainloader +1</code>的下一行是否有<code>ntldr /bootmgr</code>， 若没有则退出。因为在该位置添加上后面的语句后，只是暂时可以进入windows10。在下一次进行grub更新后，之前的写入会被重新覆盖，于是<b>该问题再放送</b>。</p>
+<li><p>找到windows10的启动选项，并查看在<code>chainloader +1</code>的下一行是否有<code>ntldr /bootmgr</code>， 若有？<b>那没事儿了</b>,若没有则退出。因为在该位置添加上后面的语句后，只是暂时可以进入windows10。在下一次进行grub更新后，之前的写入会被重新覆盖，于是<b>该问题再放送</b>。</p>
 <img src="/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/grub_cfg_check.png" class>
 </li>
 <li><p>打开<code>/etc/grub.d/40_custom</code> ，将<code>grub.cfg</code>中有关windows10启动项的配置复制到该文件中，并在<code>chainloader +1</code>的下一行添加<code>ntldr /bootmgr</code>，保存并关闭后，再次执行<code>sudo upgrade-grub</code>。该操作会将刚刚写入的配置挂接在grub配置文件中。</p>
