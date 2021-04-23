@@ -239,6 +239,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2021/04/23/Dict-Key%E4%B8%AD%E5%87%BA%E7%8E%B0-module-%E6%97%B6-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JYC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoyChans">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/23/Dict-Key%E4%B8%AD%E5%87%BA%E7%8E%B0-module-%E6%97%B6-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3/" itemprop="url">Dict Key中出现'module.'时,如何解决?</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-23T15:27:41+08:00">
+                2021-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在多GPU训练后保存的模型，在加载到单GPU上进行test时，会出现pth中key值不匹配的现象，如果像我一样直接进行save，就会踩坑。</p>
+<h3 id="具体表现"><a href="#具体表现" class="headerlink" title="具体表现"></a>具体表现</h3><p>如<code>unexpected key &quot;module.layer1.weight&quot;</code> 的情况。在debug的时候，发现dict中含有的key并无首部的module，于是在读取dict时，进行手动替换… 当然，如果在save时，注意一点可以避免该坑。</p>
+<h3 id="具体做法"><a href="#具体做法" class="headerlink" title="具体做法"></a>具体做法</h3><p>简单粗暴，直接使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.load_state_dict(&#123;k.replace(<span class="string">'module.'</span>,<span class="string">''</span>):v <span class="keyword">for</span> k,v <span class="keyword">in</span> torch.load(<span class="string">'checkpoint.pth'</span>).items()&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>替换掉原来的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.load_state_dict(torch.load(<span class="string">'checkpoint.pth'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>即可</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.jyc1998.cn/2020/11/02/%E4%BF%AE%E5%A4%8Dgrub2%E4%B8%ADwindows%E5%90%AF%E5%8A%A8%E9%A1%B9%E5%BE%AA%E7%8E%AF%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -815,7 +943,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -874,7 +1002,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
